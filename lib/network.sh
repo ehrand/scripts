@@ -12,9 +12,9 @@ conn2ssh() {
     local p="${1}"
     local u="${2:-${USER}}"
     local h="${3:-${HOSTNAME}}"
-    
+
     isInstalled ssh || return $(die);
-    
+
     local cmd=""
     if [ -z "$(grep ${h} ~/.ssh/known_hosts 2> /dev/null)" ]; then
         cmd="$(which ssh) ${u}@${h}"
@@ -37,7 +37,7 @@ doRsync() {
     local src=""
     local dst=""
     local -i args=0
-    
+
     while [ $# -gt 0 ]; do
         case "${1}" in
             -u) [[ -n "${2}" ]] && usr="${2}" && ((args++)) && shift 1;;
@@ -46,14 +46,14 @@ doRsync() {
         esac
         shift 1
     done
-    
+
     getLengthMin "${usr}" "${src}" "${dst}" && \
         printf "%s(): one of arguments is empty! [%s] [%s] [%s]\n" \
         ${FUNCNAME[0]} "${usr}" "${src}" "${dst}" >&2 && \
         return $(die)
 
     isInstalled rsync ssh || return $(die)
-    
+
     local cmd=""
     cmd+="$(which rsync)"
     cmd+=" --rsh=\"$(which ssh) -l ${usr}\""
@@ -65,7 +65,7 @@ doRsync() {
     cmd+=" --timeout=60"        # if no data is transferred during timeout [seconds] then the rsync will exit
     cmd+=" --progress"          # show progress during backup is being performed
     cmd+=" --human-readable"    # show numbers in a more human readable format"
-    
+
     echo "${cmd} ${src} ${dst}"
     eval "${cmd} ${src} ${dst}"
 }

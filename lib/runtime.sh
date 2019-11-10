@@ -61,7 +61,7 @@ printStackTrace() {
 printStackTraceFormatted() {
     # prints stack trace in format FILE --> FUNCTION --> LINE
     local separator="${1:- --> }"
-    
+
     mapfile <<< "$(printStackTrace)"
     for i in "${MAPFILE[@]}"; do
         IFS=' ' set -- ${i}
@@ -69,14 +69,14 @@ printStackTraceFormatted() {
         local funcs[${#funcs[@]}]="${2}";
         local files[${#files[@]}]="${3}";
     done
-    
+
     getLengthMax ${files[@]}
     local len_files=$?
     getLengthMax ${lines[@]}
     local len_lines=$?
     getLengthMax ${funcs[@]}
     local len_funcs=$?
-    
+
     printf "%-${len_files}s${separator}%-${len_funcs}s${separator}%${len_lines}s\n" "FILE" "FUNCTION" "LINE"
     for (( i=0; i<${#files[@]}; i++ )); do
         printf "%-${len_files}s${separator}%-${len_funcs}s${separator}%${len_lines}d\n" \
