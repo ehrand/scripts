@@ -4,9 +4,9 @@ source "${SCRIPTS_LIB_DIR}/network.sh"
 
 doBackup() {
     for folder in \
-        "/mnt/data/docs" \
-        "/mnt/data/musa" \
-        "/mnt/data/pics" \
+        "/mnt/docs" \
+        "/mnt/musa" \
+        "/mnt/pics" \
     ; do
         doRsync \
             -p "ehrlich" \
