@@ -22,8 +22,9 @@ isExecuted() {
 
 ###############################################################################
 
-# returns true when all the binaries given in parameter list are installed
-# false - when not (number of missed utilities)
+# returns true when all the binaries given in parameter list are installed;
+# false - when not (number of missed utilities) & prints list of missing
+# executable files to stderr in this case.
 isInstalled() {
     local missed="0"
     while [ $# -gt 0 ]; do
@@ -80,7 +81,7 @@ printStackTraceFormatted() {
     printf "%-${len_files}s${separator}%-${len_funcs}s${separator}%${len_lines}s\n" "FILE" "FUNCTION" "LINE"
     for (( i=0; i<${#files[@]}; i++ )); do
         printf "%-${len_files}s${separator}%-${len_funcs}s${separator}%${len_lines}d\n" \
-        "${files[$i]}" "${funcs[$i]}" "${lines[$i]}" 
+        "${files[$i]}" "${funcs[$i]}" "${lines[$i]}"
     done
 }
 
