@@ -5,21 +5,21 @@ source "${SCRIPTS_LIB_DIR}/network.sh"
 ###############################################################################
 
 usage() {
-cat << EOF
+	cat << EOF
 NAME:
-    $(basename "${0}") - restore data
+	$(basename "${0}") - restore data
 
 SYNOPSIS:
-    $(basename "${0}") [OPTIONS]
+	$(basename "${0}") [OPTIONS]
 
 DESCRIPTION:
-    This script will restore data from following directories:
+	This script will restore data from following directories:
 
-    The OPTIONS are as follows:
+	The OPTIONS are as follows:
 
-    -h  Print this help an exit.
-    -b  Restore directory "[${storage[eBooks]}]"
-        into "[${PWD}]"
+	-h	Print this help an exit.
+	-b	Restore directory "[${storage[eBooks]}]"
+		into "[${PWD}]"
 EOF
 }
 
@@ -31,27 +31,27 @@ storage["eBooks"]="an3@nasbox.fritz.box:/home/an3/backup/docs/eBooks"
 ###############################################################################
 
 doRestoreBooks() {
-    doRsync \
-        -u "an3" \
-        -s "${storage[eBooks]}" \
-        -d "${PWD}"
-}
+	doRsync \
+		-u "an3" \
+		-s "${storage[eBooks]}" \
+		-d "${PWD}"
+	}
 
 ###############################################################################
 
 doRestore() {
-    while getopts hb arg; do
-        case "${arg}" in
-            h) usage && exit 0;;
-            b) doRestoreBooks ;;
-            *) usage && exit 1;;
-        esac
-    done
+	while getopts hb arg; do
+		case "${arg}" in
+			h) usage && exit 0;;
+			b) doRestoreBooks ;;
+			*) usage && exit 1;;
+		esac
+	done
 }
 
 ###############################################################################
 
 isSourced \
-    && printf "This script is aimed to be executed!\n" \
-    || doRestore ${@}
+	&& printf "This script is aimed to be executed!\n" \
+	|| doRestore ${@}
 
