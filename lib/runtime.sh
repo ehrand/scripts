@@ -41,6 +41,34 @@ isInstalled() {
 
 ###############################################################################
 
+# returns true when the given command was executed with success
+# and number of retries has not been exceeded;
+# returns error code of last execution when command failed
+# and number of retries exceeded.
+function executeWithRetries() {
+	local -r expected_num_of_arguments="2";
+	[[ $# -ge "${expected_num_of_arguments}" ]] || {
+		printf "Not enough arguments provided!\n" >&2;
+		printf "Please provide at least [%s] arguments!\n" "${expected_num_of_arguments}" >&2;
+		return 1;
+	}
+
+	local -r retries="${1}";
+	local -r command="${2}";
+
+	local -i counter=0;
+	while [ ${counter} -lt ${retries} ]; do
+		${command} || {
+			counter=$[$counter+1];
+			sleep 1;
+		} && {
+			break;
+		}
+	done
+}
+
+###############################################################################
+
 die() {
 	[[ $# -gt 0 ]] && printf "$*\n"
 	printStackTraceFormatted >&2
