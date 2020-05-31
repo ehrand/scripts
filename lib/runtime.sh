@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This file contains useful functions that are often used for controlling
 # purposes of execution purposes.
 
@@ -26,17 +26,17 @@ isExecuted() {
 # false - when not (number of missed utilities) & prints list of missing
 # executable files to stderr in this case.
 isInstalled() {
-	local missed="0"
+	local missed=();
 	while [ $# -gt 0 ]; do
-		local utility="${1}"
-		shift 1
-		which "${utility}" &> /dev/null && continue
-		[[ ${missed} -eq 0 ]] \
-			&& printf "Following utilities are not available in \$PATH:\n" >&2
-					((missed++))
-					printf "\t'%s'\n" "${utility}" >&2;
+		local utility="${1}";
+		which "${utility}" &>/dev/null || missed+=("${utility}")
+		shift 1;
 	done
-	return ${missed};
+	[[ ${#missed[@]} -eq 0 ]] || {
+		printf "Following utilities are not available in \$PATH:\n" >&2;
+		printf "\t'%s'\n" ${missed[@]} >&2;
+	}
+	return ${#missed[@]};
 }
 
 ###############################################################################
