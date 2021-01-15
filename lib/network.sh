@@ -33,16 +33,15 @@ conn2ssh() {
 
 doRsync() {
 
-	local usr=""
-	local src=""
-	local dst=""
-	local -i args=0
+	local usr="";
+	local src="";
+	local dst="";
 
 	while [ $# -gt 0 ]; do
 		case "${1}" in
-			-u) [[ -n "${2}" ]] && usr="${2}" && ((args++)) && shift 1;;
-			-s) [[ -n "${2}" ]] && src="${2}" && ((args++)) && shift 1;;
-			-d) [[ -n "${2}" ]] && dst="${2}" && ((args++)) && shift 1;;
+			-u) [[ -n "${2}" ]] && usr="${2}" && shift 1;;
+			-s) [[ -n "${2}" ]] && src="${2}" && shift 1;;
+			-d) [[ -n "${2}" ]] && dst="${2}" && shift 1;;
 		esac
 		shift 1
 	done
