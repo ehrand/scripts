@@ -23,6 +23,7 @@ __packages+=(\
 	"clang" "cmake" "ctags" \
 	"git" \
 	"linux-headers" "linux-lts" "linux-lts-headers" \
+	"make" \
 	"ninja" \
 	"pkgfile" \
 	"python-pip" \
