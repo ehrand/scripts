@@ -104,10 +104,6 @@ __packages+=(\
 	"plasma-meta" \
 	"qt5-imageformats" \
 	"xorg-server" "xorg-xinit" \
-	"adobe-source-code-pro-fonts" \
-	"ttf-dejavu" \
-	"ttf-font-awesome" \
-	"ttf-liberation" \
 	);
 
 __tmp_dir="$(mktemp -d)";
