@@ -2,7 +2,7 @@
 # This file contains useful functions that are often used for controlling
 # purposes of execution purposes.
 
-source "${SCRIPTS_LIB_DIR}/string.sh"
+source "${SCRIPTS_LIB}/string.sh"
 
 ###############################################################################
 

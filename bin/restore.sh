@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source "${SCRIPTS_LIB_DIR}/network.sh"
+source "${SCRIPTS_LIB}/network.sh"
 
 ###############################################################################
 
