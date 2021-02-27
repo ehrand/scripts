@@ -101,6 +101,7 @@ __packages+=(\
 	"dolphin" \
 	"gwenview" \
 	"konsole" \
+	"okular" \
 	"plasma-meta" \
 	"qt5-imageformats" \
 	"xorg-server" "xorg-xinit" \
