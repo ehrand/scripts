@@ -1,0 +1,78 @@
+#! /usr/bin/env bash
+
+set -e	# exit immediately when a command exits with a non-zero status.
+set -u	# exit immediately when an undefined variable is referenced.
+#set -x	# show every executed command.
+
+##########################################################################################
+
+memories=();
+memories+=("[!!] repeat the last executed command.");
+memories+=("[!$] repeat the last argument of last executed command (the same as [Alt-.]).");
+memories+=("[!:0] repeat the first word of the last executed command (the executable name).");
+memories+=("[!:*] repeat all parameters of the last command (everything except executable name).");
+memories+=("[!#:0] repeat the first word of the current command (the executable name).");
+
+memories+=("[Alt-a] go to the beginning of the line.");
+memories+=("[Alt-b] go backward one word."); # TODO: conflicts with tmux prefix
+memories+=("[Alt-c] suspend the running process (the same as [Ctrl-c]).");
+memories+=("[Alt-d] close the empty terminal or delete all characters to the right of cursor.");
+memories+=("[Alt-e] go to the next line starting with the same word (opposite to [Alt-p]).")
+memories+=("[Alt-f] go forward one word.");
+memories+=("[Alt-p] go to the previous line starting with the same word (opposite to [Alt-e].")
+memories+=("[Alt-r] undo any changes to the command that you have brought from the history.");
+memories+=("[Alt-r] open fzf reverse search.");
+memories+=("[Alt-.] use the last word of the previous command (the same as [!$]).");
+
+memories+=("[Ctrl-a] go to the beginning of the line (the same as [Alt-a]).");
+memories+=("[Ctrl-b] go one character to the left (the same as [left arrow]).");
+memories+=("[Ctrl-c] stop the currently running process.");
+memories+=("[Ctrl-d] delete one character (the same as [backspace]).");
+memories+=("[Ctrl-e] go to the end of the line.");
+memories+=("[Ctrl-f] go one character to the right (the same as [right arrow]).");
+memories+=("[Ctrl-g] leave the history searching mode (this will effectively delete everything you have typed in in history searching mode).");
+memories+=("[Ctrl-h] delete one character (the same as [backspace])."); # TODO: conflicts with tmux.
+memories+=("[Ctrl-j] the same as [enter]."); # TODO: conflicts with tmux.
+memories+=("[Ctrl-k] delete one character to the right (the same as [delete])."); # TODO: conflicts with tmux.
+memories+=("[Ctrl-l] clear the screen and redisplay the line."); # TODO: conflicts with tmux.
+memories+=("[Ctrl-m] the same as [enter].");
+memories+=("[Ctrl-n] display next line in command history (the same as [down arrow]).");
+memories+=("[Ctrl-o] run the command that you have found in history.");
+memories+=("[Ctrl-p] display previous line in command history (the same as [up arrow]).");
+memories+=("[Ctrl-r] search history backwards.");
+memories+=("[Ctrl-s] search history forwards.");
+memories+=("[Ctrl-t] swap the last two characters.");
+memories+=("[Ctrl-u] delete all characters from current position to beginning of the line (in zsh the complete line is deleted independent from cursor position).");
+memories+=("[Ctrl-v] make the next character typed verbatim.");
+memories+=("[Ctrl-w] delete one word to the left of cursor.");
+memories+=("[Ctrl-x] list the possible filename completions for the current word.");
+memories+=("[Ctrl-x][Ctrl-e] will open the current line in \${EDITOR}".);
+memories+=("[Ctrl-xx] toggle between the current position and beginning of the line.");
+memories+=("[Ctrl-y] retrieve last item that you have deleted.");
+memories+=("[Ctrl-z] stop the current process.");
+memories+=("[Ctrl-[] the same as [esc].");
+
+memories+=("[Crl-z] sends SIGTSTP (gives the process time to organize itself and stop gracefully) to the foreground process.");
+memories+=("[Crl-c] sends SIGINT (terminate, interrupt) to the foreground process.");
+memories+=("[Crl-\] sends IGQUIT (terminate, generate coredump) to the foreground process.");
+
+memories+=("[apropos] & [man -k] have the same effect.");
+memories+=("'[' & 'test' are the same proram (they are both builtins in zsh).");
+memories+=("[bindkey -L] lists all configured key bindings in zsh.");
+memories+=("[bindkey -l] lists key binding groups.");
+memories+=("[zle -la] will list all editor commands that can be bound.");
+
+##########################################################################################
+
+reminder() {
+	which cowsay &>/dev/null || return 1;
+
+	local -r limit="${#memories[@]}";
+	local -r idx="$(( ${RANDOM} % ${limit} ))";
+
+	printf "%s" "${memories[${idx}]}" | cowsay;
+}
+
+##########################################################################################
+
+reminder
