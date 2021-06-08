@@ -14,7 +14,7 @@ memories+=("[!:*] repeat all parameters of the last command (everything except e
 memories+=("[!#:0] repeat the first word of the current command (the executable name).");
 
 memories+=("[Alt-a] go to the beginning of the line.");
-memories+=("[Alt-b] go backward one word."); # TODO: conflicts with tmux prefix
+memories+=("[Alt-b] go backward one word.");
 memories+=("[Alt-c] suspend the running process (the same as [Ctrl-c]).");
 memories+=("[Alt-d] close the empty terminal or delete all characters to the right of cursor.");
 memories+=("[Alt-e] go to the next line starting with the same word (opposite to [Alt-p]).")
