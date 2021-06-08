@@ -64,6 +64,11 @@ memories+=("[zle -la] will list all editor commands that can be bound.");
 
 memories+=("'local i=${!1}' in bash will take the value of the variable which name is passed in \${1}");
 memories+=("'eval' command can be used for variable indirection (the command line is parsed twice)");
+
+memories+=("'${VAR:=default value}' will assign 'default value' to \${VAR} when \${VAR} is empty.");
+memories+=("'${VAR:-default value}' will use 'default value' when \${VAR} is not defined without changing ${VAR} itself.");
+memories+=("'${VAR:?error message}' will print 'error message' when \${VAR} is not defined.");
+
 ##########################################################################################
 
 reminder() {
