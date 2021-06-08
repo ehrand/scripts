@@ -62,6 +62,8 @@ memories+=("[bindkey -L] lists all configured key bindings in zsh.");
 memories+=("[bindkey -l] lists key binding groups.");
 memories+=("[zle -la] will list all editor commands that can be bound.");
 
+memories+=("'local i=${!1}' in bash will take the value of the variable which name is passed in \${1}");
+memories+=("'eval' command can be used for variable indirection (the command line is parsed twice)");
 ##########################################################################################
 
 reminder() {
