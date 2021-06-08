@@ -67,6 +67,7 @@ memories+=("'eval' command can be used for variable indirection (the command lin
 
 memories+=("'${VAR:=default value}' will assign 'default value' to \${VAR} when \${VAR} is empty.");
 memories+=("'${VAR:-default value}' will use 'default value' when \${VAR} is not defined without changing ${VAR} itself.");
+memories+=("'${VAR:+optional value}' will use 'optional value' when \${VAR} is defined without changing ${VAR} itself.");
 memories+=("'${VAR:?error message}' will print 'error message' when \${VAR} is not defined.");
 
 ##########################################################################################
